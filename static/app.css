@@ -1,18 +1,20 @@
 
-.display-numbers{
-    height: 30vh;
-}
 
 .col{
     padding: 30px!important;
     border: 1px solid #e3f2fd ;
 }
 
-.display-numbers{
+#display-numbers{
+    height: 30vh;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
 }
-.controlBtns{
+#controlBtns{
     color: white;
+}
+
+#display-numbers h3{
+    margin: 30px 50px 30px 30px;   
 }

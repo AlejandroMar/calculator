@@ -10,13 +10,13 @@
 </head>
 <body>
   <div class="container">
-      <div class="display-numbers  blue lighten-5">
+      <div class="blue lighten-5" id="display-numbers">
           
       </div>
      <div class="row center-align controlers" id="controlBtns">
         <div data-reset="reset" class="col s3 orange darken-4">AC</div>
-        <div data-operator="percent"class="col s3 yellow darken-4">%</div>
         <div data-operator="%" class="col s3 yellow darken-4">rest</div>
+        <div data-operator="percent"class="col s3 yellow darken-4">%</div>
         <div data-operator="/" class="col s3 yellow darken-4">/</div>
         <div data-number="7" class="col s3 blue-grey darken-3">7</div>
         <div data-number="8" class="col s3 blue-grey darken-3">8</div>
@@ -33,14 +33,11 @@
         <div data-decimal="." class="col s3 blue-grey darken-3">.</div>
         <div data-number="0" class="col s3 blue-grey darken-3">0</div>
         <div data-undo="undo" class="col s3  orange darken-4">undo</div>
-        <div data-equal="equal" class="col s3 teal accent-3">=</div>
+        <div id="equal" class="col s3 teal accent-3">=</div>
     </div>
 
   </div>
 
-
-
-
-    <script src="./scripts/app.js"></script>
+    <script src="./scripts/app.js"></script> 
 </body>
 </html>

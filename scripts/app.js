@@ -1,33 +1,41 @@
 class Model {
     constructor(){
-        //get the buttons container
-        this.controlBtns = document.getElementById('controlBtns');
-        //this.equalBtn = this.controlBtns.querySelector('[data-equal]');
-        this.filteredInputArray = [];
-        this.operators = ['+', '-', '*', '/'];
-        
+        this.filteredArray = [];
+        this.operators = ['+', '-', '*', '/', 'percent', '%' ];
+        this.result = '';
         this.init();
+        this.getFilteredArray;
+
     }
 
      init() {
         console.log('App runnning');
         
     }
+
+    getFilteredArray(arr){
+        this.filteredArray = arr;
+    }
+
     // function in charge of resolving the equation
     doMath(arr){
-        debugger;   
-        this.filteredInputArray = controlerInstance.userInputArray; 
-        let arrayToString = this.filteredInputArray.join('');
+        //debugger;    
+        let arrayToString = arr.join('');
         console.log(arrayToString);
-        let result = eval(arrayToString);
-        console.log(result);
+        this.result = eval(arrayToString);
+        console.log(this.result);
     } 
 };
 
 //Controler Class
 class Controler {
     constructor(){
+        //get the buttons container
+        this.controlBtns = Array.from(document.querySelectorAll('.col')).filter(elm => elm.id !== 'equal');
+        this.equalBtn = document.querySelector('#equal');
+        //set input array
         this.userInputArray = [];
+        //Controler functions
         this.setEventListeners();
         this.checkForNumber;
         this.checkOperators;
@@ -37,10 +45,20 @@ class Controler {
 
     //listen for events
     setEventListeners(){
-        modelInstance.controlBtns.addEventListener('click',(e)=>{
-            controlerInstance.getClickedDataSet(e);
-            viewInstance.displayInput();
-        });    
+        this.controlBtns.forEach((btn) => {
+            btn.addEventListener('click',(e)=>{ 
+                controlerInstance.getClickedDataSet(e);
+                viewInstance.displayInput(this.userInputArray);
+            })
+        });
+
+        //listen for Equal button and habndle the event
+        this.equalBtn.addEventListener('click', (e)=>{
+            this.prepArrayForMath();
+            modelInstance.getFilteredArray(this.userInputArray);
+            modelInstance.doMath(modelInstance.filteredArray);
+            viewInstance.showResult(modelInstance.result);
+        })
     }
 
 
@@ -58,9 +76,7 @@ class Controler {
         }else if(data.operator){
             this.checkOperators(data);
         }//Check for equal button and call Model.doMath
-         else if(data.equal){
-            this.prepArrayForMath(data);
-        }else if(data.undo){
+         else if(data.undo){
             this.undo(this.userInputArray)
         }
         
@@ -97,14 +113,11 @@ class Controler {
     }
     
     //This function makes shure the array is ready for the math function
-    prepArrayForMath(data){
-        debugger;
+    prepArrayForMath(){
+        //debugger;
         let lastItem = this.userInputArray[this.userInputArray.length - 1];
         if(modelInstance.operators.includes(lastItem)){
             console.log('invalid equation');
-        }else{
-            modelInstance.doMath(this.userInputArray);
-            this.userInputArray = [];
         }
     }
     //undo last input
@@ -117,13 +130,20 @@ class Controler {
 
 class View {
     constructor(){
-        this.display = document.querySelector('.display-numbers')
-        console.log(this.display);  
+        this.displayLayer = document.getElementById('display-numbers');
+        this.showResult;
+        this.displayInput;
     }
 
-    displayInput(){
-        this.display.innerHTML = `<span>${controlerInstance.userInputArray}</span>`
+    displayInput(arr){
+        let stringForDisplay = arr.join('')
+        this.displayLayer.innerHTML = `<h3>${stringForDisplay}</h3>`
     }
+
+    showResult(str){
+        this.displayLayer.innerHTML = `<h3>${str}</h3>`
+    }
+     
 }
 
 const modelInstance = new Model();
