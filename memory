@@ -1,0 +1,15 @@
+(5) ["2", "1", "+", "0", "1"]0: "2"1: "1"2: "+"3: "0"4: "1"length: 5__proto__: Array(0)
+parseInt(["2", "1", "+", "0", "1"])
+2
+parseInt(["2", "1", "+", "0", "1"].join(''))
+21
+21.split(',')
+VM4634:1 Uncaught SyntaxError: Invalid or unexpected token
+'21'.split()
+["21"]
+'21'.split(',')
+["21"]
+'21'.split('')
+(2) ["2", "1"]
+'21'.split('').reverse()
+(2) ["1", "2"]
