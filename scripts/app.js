@@ -142,7 +142,7 @@ class View {
     }
 
     alertInvalidOperation(){
-        let invalidOperationMssg = `<p class="red lighten-1">Invalid operation</p>` 
+        let invalidOperationMssg = `<p class="invalid-alert red lighten-1">Invalid operation please press undo</p>` 
         this.displayLayer.insertAdjacentHTML('beforeend', invalidOperationMssg )
     }
      
