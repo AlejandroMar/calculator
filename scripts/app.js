@@ -50,26 +50,35 @@ class Controler {
 
     //listen for events
     setEventListeners(){
-        this.controlBtns.forEach((btn) => {
-            btn.addEventListener('click',(e)=>{ 
-                controlerInstance.getClickedDataSet(e);
+        //listen for Number Events
+        this.numbersArray.forEach((number)=> {
+            number.addEventListener('click', (e) =>{
+                let clickedNumber = e.target.dataset.number;
+                this.checkForNumber(clickedNumber);
                 viewInstance.displayInput(this.userInputArray);
             })
+            /* controlerInstance.getClickedDataSet(e);
+            viewInstance.displayInput(this.userInputArray); */
         });
 
-        //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
             this.prepArrayForMath();
             modelInstance.getFilteredArray(this.userInputArray);
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
         })
+        
     }
+       
+
+        //listen for Equal button and habndle the event
+       
+    
 
 
     getClickedDataSet(e){
         let clickedDataset = e.target.dataset;
-        controlerInstance.filterInput(clickedDataset);
+        //controlerInstance.filterInput(clickedDataset);
     }
 
     //make shure the input is valid
@@ -91,7 +100,7 @@ class Controler {
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
-        this.userInputArray.push(data.number);
+        this.userInputArray.push(data);
         console.log(this.userInputArray);
     }
    
