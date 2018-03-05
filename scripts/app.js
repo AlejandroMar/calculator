@@ -164,7 +164,16 @@ class View {
     }
 
     displayInput(arr){
-        let stringForDisplay = arr.join('')
+        let stringForDisplay = arr.map((elem) => {
+            if(elem === '%'){
+                elem = 'rest'
+            }
+            return elem
+        }).join('');
+        
+        
+        console.log(stringForDisplay);
+        
         this.displayLayer.innerHTML = `<h3 class="userInput">${stringForDisplay}</h3>`
     }
 
