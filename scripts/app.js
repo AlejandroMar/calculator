@@ -3,11 +3,15 @@ class Model {
         this.filteredArray = [];
         this.operators = ['+', '-', '*', '/', 'percent', '%' ];
         this.result = '';
+        this.cleanFilteredArray;
     }
 
  
 
-    
+    //function for cleaning the array
+    cleanFilteredArray(){
+        this.filteredArray = [];
+    }
 
     // function in charge of resolving the equation
     doMath(arr){
@@ -64,6 +68,7 @@ class Controler {
             if(this.prepArrayForMath()){
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
+            modelInstance.cleanFilteredArray();
             }else{
                 viewInstance.alertInvalidOperation()
                 console.log('Invalid operation')
