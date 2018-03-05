@@ -18,3 +18,11 @@
 #display-numbers h3{
     margin: 30px 50px 30px 30px;   
 }
+
+.userInput{
+    display: block;
+    color:#4527a0  ;
+}
+.answer{
+    color: #00695c;
+}

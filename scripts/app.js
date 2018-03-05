@@ -3,9 +3,6 @@ class Model {
         this.filteredArray = [];
         this.operators = ['+', '-', '*', '/', 'percent', '%' ];
         this.result = '';
-        
-        
-
     }
 
  
@@ -52,7 +49,6 @@ class Controler {
                 this.checkForNumber(clickedNumber);
                 viewInstance.displayInput(modelInstance.filteredArray);
             })
-
         });
 
         //listen for operator events
@@ -69,6 +65,7 @@ class Controler {
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
             }else{
+                viewInstance.alertInvalidOperation()
                 console.log('Invalid operation')
             }
         });
@@ -137,11 +134,16 @@ class View {
 
     displayInput(arr){
         let stringForDisplay = arr.join('')
-        this.displayLayer.innerHTML = `<h3>${stringForDisplay}</h3>`
+        this.displayLayer.innerHTML = `<h3 class="userInput">${stringForDisplay}</h3>`
     }
 
     showResult(str){
-        this.displayLayer.innerHTML = `<h3>${str}</h3>`
+        this.displayLayer.innerHTML = `<h3 class="answer">${str}</h3>`
+    }
+
+    alertInvalidOperation(){
+        let invalidOperationMssg = `<p class="red lighten-1">Invalid operation</p>` 
+        this.displayLayer.insertAdjacentHTML('beforeend', invalidOperationMssg )
     }
      
 }
