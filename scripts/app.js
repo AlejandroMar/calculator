@@ -74,6 +74,10 @@ class Controler {
             modelInstance.getFilteredArray(this.userInputArray);
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
+        });
+
+        this.undoBtn.addEventListener('click', (e) => {
+            this.undo();
         })
         
     }
