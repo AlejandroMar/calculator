@@ -81,7 +81,9 @@ class Controler {
         })
         //reset button listener
         this.resetBtn.addEventListener('click', (e) =>{
+            //clean array
             modelInstance.cleanFilteredArray();
+            //show cleaned array
             viewInstance.showResult(modelInstance.result);
         })
     } 
