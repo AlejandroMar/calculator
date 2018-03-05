@@ -114,13 +114,24 @@ class Controler {
     
     //This function makes shure the array is ready for the math function
     prepArrayForMath(){
+        debugger;
+        let testPassed = false;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
+        let firstItem = modelInstance.filteredArray[0];
+        let secondItem = modelInstance.filteredArray[1];
         if(modelInstance.operators.includes(lastItem)){
-            return false
+            testPassed = false;
         }
         else{
-            return true
+            testPassed = true;
         }
+        if(firstItem === '0' ){
+            modelInstance.filteredArray[0] = '0o';
+            console.log(modelInstance.filteredArray);
+            
+            testPassed = true;
+        }
+        return testPassed;
     }
     //undo last input
     undo(){
