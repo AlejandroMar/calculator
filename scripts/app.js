@@ -35,7 +35,7 @@ class Controler {
         this.equalBtn = this.controlBtns.querySelector('#equal'); 
         this.undoBtn = this.controlBtns.querySelector('#undo');
         this.resetBtn = this.controlBtns.querySelector('#reset')
-        this.decimalPoint = this.controlBtns.querySelector('[data-decimal]');
+        this.decimalPoint = this.controlBtns.querySelector('[data-decimal]'); // not used now
         this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
         this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
         //set input array
@@ -90,9 +90,10 @@ class Controler {
             //clean result
             modelInstance.cleanResul();
             //show cleaned array
-            viewInstance.showResult(modelInstance.result);
-            
+            viewInstance.showResult(modelInstance.result);  
         })
+
+
     } 
 
     // functions for checking diferent inputs
@@ -130,6 +131,7 @@ class Controler {
         debugger;
         let lastItemTestPassed = false;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
+        let seconItem = modelInstance.filteredArray[1];
         let firstItem = modelInstance.filteredArray[0];
         if(modelInstance.operators.includes(lastItem)){
             lastItemTestPassed = false;
@@ -138,7 +140,7 @@ class Controler {
             lastItemTestPassed = true;
         }
         //check if first item in array is 0
-        if(firstItem === '0' ){
+        if(firstItem === '0' && seconItem !== '.'){
             //for octal literals use the "0o" prefix instead
             modelInstance.filteredArray[0] = '0o';
         }
