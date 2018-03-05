@@ -8,15 +8,18 @@ class Model {
 
     //funtion to configurate the percentage in the filtered array
      setPercentInFilteredArr(){
+         debugger
         let tempArr = this.filteredArray.map(element => element);
-        let setPercent = String(parseInt(tempArr.reverse().join('')))
+        let setPercentOperation = String (Number(String(parseInt(tempArr.reverse().join('')))
                     .split('')
-                    .reverse().join('')
-                    .split() + '/';   
+                    .reverse().join('')) /100);
+                       
+        this.filteredArray.pop();
+        this.filteredArray.push(setPercentOperation);
+
         console.log('original', this.filteredArray);
-        console.log(setPercent);
-        
-        console.log(tempArr);
+        console.log('percent', setPercentOperation);
+        console.log('mapped', tempArr);
         
         
         
@@ -111,6 +114,7 @@ class Controler {
 
         this.percentBtn.addEventListener('click', () =>{ 
             modelInstance.setPercentInFilteredArr();
+            viewInstance.displayInput(modelInstance.filteredArray);
         })
 
     } 
