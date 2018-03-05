@@ -30,7 +30,7 @@ class Controler {
         this.controlBtns = document.getElementById('controlBtns');
         this.equalBtn = this.controlBtns.querySelector('#equal'); 
         this.undoBtn = this.controlBtns.querySelector('#undo');
-        this.reset = this.controlBtns.querySelector('#reset')
+        this.resetBtn = this.controlBtns.querySelector('#reset')
         this.decimalPoint = this.controlBtns.querySelector('[data-decimal]');
         this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
         this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
@@ -79,7 +79,11 @@ class Controler {
             this.undo();
             viewInstance.displayInput(modelInstance.filteredArray);
         })
-        
+        //reset button listener
+        this.resetBtn.addEventListener('click', (e) =>{
+            modelInstance.cleanFilteredArray();
+            viewInstance.showResult(modelInstance.result);
+        })
     } 
 
     // functions for checking diferent inputs
@@ -115,23 +119,23 @@ class Controler {
     //This function makes shure the array is ready for the math function
     prepArrayForMath(){
         debugger;
-        let testPassed = false;
+        let lastItemTestPassed = false;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let firstItem = modelInstance.filteredArray[0];
-        let secondItem = modelInstance.filteredArray[1];
         if(modelInstance.operators.includes(lastItem)){
-            testPassed = false;
+            lastItemTestPassed = false;
         }
         else{
-            testPassed = true;
+            lastItemTestPassed = true;
         }
+        //check if first item in array is 0
         if(firstItem === '0' ){
+            //for octal literals use the "0o" prefix instead
             modelInstance.filteredArray[0] = '0o';
-            console.log(modelInstance.filteredArray);
-            
-            testPassed = true;
         }
-        return testPassed;
+        //check if  test are passed
+        return lastItemTestPassed
+        
     }
     //undo last input
     undo(){
