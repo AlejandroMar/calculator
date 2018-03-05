@@ -1,7 +1,7 @@
 class Model {
     constructor(){
         this.filteredArray = [];
-        this.operators = ['+', '-', '*', '/', 'percent', '%' ];
+        this.operators = ['+', '-', '*', '/', '%' ];
         this.result = '';
         this.cleanFilteredArray;
     }
@@ -36,6 +36,7 @@ class Controler {
         this.undoBtn = this.controlBtns.querySelector('#undo');
         this.resetBtn = this.controlBtns.querySelector('#reset')
         this.decimalPoint = this.controlBtns.querySelector('[data-decimal]'); // not used now
+        this.percentBtn = this.controlBtns.querySelector('[data-percent]');
         this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
         this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
         //set input array
