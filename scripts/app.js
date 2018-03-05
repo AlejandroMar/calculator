@@ -13,6 +13,10 @@ class Model {
         this.filteredArray = [];
     }
 
+    cleanResul(){
+        this.result = '';
+    }
+
     // function in charge of resolving the equation
     doMath(arr){
         //debugger;    
@@ -83,8 +87,11 @@ class Controler {
         this.resetBtn.addEventListener('click', (e) =>{
             //clean array
             modelInstance.cleanFilteredArray();
+            //clean result
+            modelInstance.cleanResul();
             //show cleaned array
             viewInstance.showResult(modelInstance.result);
+            
         })
     } 
 
