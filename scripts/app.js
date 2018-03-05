@@ -30,9 +30,14 @@ class Model {
 //Controler Class
 class Controler {
     constructor(){
-        //get the buttons container
-        this.controlBtns = Array.from(document.querySelectorAll('.col')).filter(elm => elm.id !== 'equal');
-        this.equalBtn = document.querySelector('#equal');
+        //get the  buttons container
+        this.controlBtns = document.getElementById('controlBtns');
+        this.equalBtn = this.controlBtns.querySelector('#equal'); 
+        this.undoBtn = this.controlBtns.querySelector('#undo');
+        this.reset = this.controlBtns.querySelector('#reset')
+        this.decimalPoint = this.controlBtns.querySelector('[data-decimal]');
+        this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
+        this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
         //set input array
         this.userInputArray = [];
         //Controler functions
