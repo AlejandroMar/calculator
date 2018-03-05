@@ -3,15 +3,12 @@ class Model {
         this.filteredArray = [];
         this.operators = ['+', '-', '*', '/', 'percent', '%' ];
         this.result = '';
-        this.init();
-        this.getFilteredArray;
-
-    }
-
-     init() {
-        console.log('App runnning');
         
+        
+
     }
+
+ 
 
     
 
@@ -37,8 +34,8 @@ class Controler {
         this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
         this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
         //set input array
-        this.userInputArray = [];
-        //Controler functions
+
+        //Controler functions initiation
         this.setEventListeners();
         this.checkForNumber;
         this.checkOperators;
@@ -68,9 +65,12 @@ class Controler {
         });
         //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
-            this.prepArrayForMath();
+            if(this.prepArrayForMath()){
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
+            }else{
+                console.log('Invalid operation')
+            }
         });
         //Undo btn listener
         this.undoBtn.addEventListener('click', (e) => {
@@ -112,10 +112,12 @@ class Controler {
     
     //This function makes shure the array is ready for the math function
     prepArrayForMath(){
-        debugger;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         if(modelInstance.operators.includes(lastItem)){
-            console.log('invalid equation');
+            return false
+        }
+        else{
+            return true
         }
     }
     //undo last input
