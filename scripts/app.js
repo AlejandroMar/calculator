@@ -50,15 +50,23 @@ class Controler {
 
     //listen for events
     setEventListeners(){
-        //listen for Number Events
+        //listen for number Events
         this.numbersArray.forEach((number)=> {
             number.addEventListener('click', (e) =>{
                 let clickedNumber = e.target.dataset.number;
                 this.checkForNumber(clickedNumber);
                 viewInstance.displayInput(this.userInputArray);
             })
-            /* controlerInstance.getClickedDataSet(e);
-            viewInstance.displayInput(this.userInputArray); */
+
+        });
+
+        //listen for operator events
+        this.operatorsArray.forEach((operator)=> {
+            operator.addEventListener('click', (e) =>{
+                let clickedOperator = e.target.dataset;
+                this.checkOperators(clickedOperator);
+                viewInstance.displayInput(this.userInputArray);
+            })
         });
 
         this.equalBtn.addEventListener('click', (e)=>{
@@ -76,10 +84,10 @@ class Controler {
     
 
 
-    getClickedDataSet(e){
+    /* getClickedDataSet(e){
         let clickedDataset = e.target.dataset;
         //controlerInstance.filterInput(clickedDataset);
-    }
+    } */
 
     //make shure the input is valid
     filterInput(data){
