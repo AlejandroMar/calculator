@@ -68,45 +68,19 @@ class Controler {
                 viewInstance.displayInput(this.userInputArray);
             })
         });
-
+        //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
             this.prepArrayForMath();
             modelInstance.getFilteredArray(this.userInputArray);
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
         });
-
+        //Undo btn listener
         this.undoBtn.addEventListener('click', (e) => {
             this.undo();
         })
         
-    }
-       
-
-        //listen for Equal button and habndle the event
-       
-    
-
-
-    /* getClickedDataSet(e){
-        let clickedDataset = e.target.dataset;
-        //controlerInstance.filterInput(clickedDataset);
-    } */
-
-    //make shure the input is valid
-    filterInput(data){
-        //input numbers
-        if(data.number){
-            this.checkForNumber(data);
-        //check for valid operators   
-        }else if(data.operator){
-            this.checkOperators(data);
-        }//Check for equal button and call Model.doMath
-         else if(data.undo){
-            this.undo(this.userInputArray)
-        }
-        
-    }
+    } 
 
     // functions for checking diferent inputs
 
