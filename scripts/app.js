@@ -13,9 +13,7 @@ class Model {
         
     }
 
-    getFilteredArray(arr){
-        this.filteredArray = arr;
-    }
+    
 
     // function in charge of resolving the equation
     doMath(arr){
@@ -55,7 +53,7 @@ class Controler {
             number.addEventListener('click', (e) =>{
                 let clickedNumber = e.target.dataset.number;
                 this.checkForNumber(clickedNumber);
-                viewInstance.displayInput(this.userInputArray);
+                viewInstance.displayInput(modelInstance.filteredArray);
             })
 
         });
@@ -65,19 +63,19 @@ class Controler {
             operator.addEventListener('click', (e) =>{
                 let clickedOperator = e.target.dataset;
                 this.checkOperators(clickedOperator);
-                viewInstance.displayInput(this.userInputArray);
+                viewInstance.displayInput(modelInstance.filteredArray);
             })
         });
         //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
             this.prepArrayForMath();
-            modelInstance.getFilteredArray(this.userInputArray);
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
         });
         //Undo btn listener
         this.undoBtn.addEventListener('click', (e) => {
             this.undo();
+            viewInstance.displayInput(modelInstance.filteredArray);
         })
         
     } 
@@ -86,44 +84,44 @@ class Controler {
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
-        this.userInputArray.push(data);
-        console.log(this.userInputArray);
+        modelInstance.filteredArray.push(data);
+        console.log(modelInstance.filteredArray);
     }
    
     //Checks for valid operations
     checkOperators(data){
         //debugger;
         //define last and second las item in array
-        let lastItem = this.userInputArray[this.userInputArray.length - 1];
-        let secondLast = this.userInputArray[this.userInputArray.length - 2];
+        let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
+        let secondLast = modelInstance.filteredArray[modelInstance.filteredArray.length - 2];
         console.log(lastItem);
         // Check if last item is and operator
         if(modelInstance.operators.includes(lastItem)){
             //Check if second last is not an operator
             if(data.operator === '-' && !modelInstance.operators.includes(secondLast)){
-                this.userInputArray.push(data.operator);
-                console.log(this.userInputArray);  
+                modelInstance.filteredArray.push(data.operator);
+                console.log(modelInstance.filteredArray);  
             }else{
                 console.log('Invalid input');  
             }        
         }else{
-                this.userInputArray.push(data.operator);
-                console.log(this.userInputArray); 
+            modelInstance.filteredArray.push(data.operator);
+                console.log(modelInstance.filteredArray); 
             }
     }
     
     //This function makes shure the array is ready for the math function
     prepArrayForMath(){
-        //debugger;
-        let lastItem = this.userInputArray[this.userInputArray.length - 1];
+        debugger;
+        let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         if(modelInstance.operators.includes(lastItem)){
             console.log('invalid equation');
         }
     }
     //undo last input
     undo(){
-        let poppedValue = this.userInputArray.pop();
-        console.log(this.userInputArray);
+        let poppedValue = modelInstance.filteredArray.pop();
+        console.log(modelInstance.filteredArray);
         
     }    
 }
