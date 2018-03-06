@@ -4,8 +4,7 @@ class Model {
         this.operators = ['+', '-', '*', '/', '%' ];
         this.result = '';
         this.cleanFilteredArray;
-        this.mathDone = false; 
-        
+        this.mathDone = false;  
     }
 
    
@@ -116,6 +115,10 @@ class Controler {
         });
         //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
+             if(modelInstance.mathDone){
+                modelInstance.resultIntoFilteredArray();
+                //viewInstance.showResult(modelInstance.result);
+            } 
             if(this.prepArrayForMath()){
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
@@ -231,6 +234,7 @@ class View {
     }
 
     showResult(str){
+        debugger;   
         this.displayLayer.innerHTML = `<h3 class="answer">${str}</h3>`
     }
 
