@@ -4,7 +4,11 @@ class Model {
         this.operators = ['+', '-', '*', '/', '%' ];
         this.result = '';
         this.cleanFilteredArray;
+        this.mathDone = false; 
+        
     }
+
+   
 
     //funtion to configurate the percentage in the filtered array
      setPercentInFilteredArr(){
@@ -31,6 +35,7 @@ class Model {
 
     //function for cleaning the array
     cleanFilteredArray(){
+        debugger;
         this.filteredArray = [];
     }
 
@@ -39,16 +44,19 @@ class Model {
     }
 
     resultIntoFilteredArray(){
+        debugger;
         this.filteredArray.push(this.result);
+        this.mathDone = false;
     }
 
     // function in charge of resolving the equation
     doMath(arr){
-        //debugger;    
+        debugger;   
         let arrayToString = arr.join('');
         console.log(arrayToString);
         this.result = eval(arrayToString);
         console.log(this.result);
+        this.mathDone = true;
     } 
 };
 
@@ -64,8 +72,8 @@ class Controler {
         this.percentBtn = this.controlBtns.querySelector('[data-percent]');
         this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
         this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
-        //set input array
-
+        
+        
         //Controler functions initiation
         this.setEventListeners();
         this.checkForNumber;
@@ -79,6 +87,10 @@ class Controler {
         //listen for number Events
         this.numbersArray.forEach((number)=> {
             number.addEventListener('click', (e) =>{
+                if(modelInstance.mathDone){
+                    modelInstance.cleanFilteredArray();
+                    modelInstance.mathDone = false;
+                }
                 let clickedNumber = e.target.dataset.number;
                 this.checkForNumber(clickedNumber);
                 viewInstance.displayInput(modelInstance.filteredArray);
@@ -87,11 +99,18 @@ class Controler {
 
         //listen for operator events
         this.operatorsArray.forEach((operator)=> {
+            operator.addEventListener('click', (e)=>{
+                if(modelInstance.mathDone){
+                    modelInstance.resultIntoFilteredArray();   
+                }
+                
+            })
             operator.addEventListener('click', (e) =>{
                 let clickedOperator = e.target.dataset;
                 this.checkOperators(clickedOperator);
                 viewInstance.displayInput(modelInstance.filteredArray);
             })
+            
         });
         //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
@@ -99,7 +118,7 @@ class Controler {
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
             modelInstance.cleanFilteredArray();
-            modelInstance.resultIntoFilteredArray();
+            //modelInstance.resultIntoFilteredArray();
             }else{
                 viewInstance.alertInvalidOperation()
                 console.log('Invalid operation')
@@ -128,6 +147,7 @@ class Controler {
     } 
 
     // functions for checking diferent inputs
+   
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
@@ -159,7 +179,7 @@ class Controler {
     
     //This function makes shure the array is ready for the math function
     prepArrayForMath(){
-        debugger;
+        
         let lastItemTestPassed = false;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let seconItem = modelInstance.filteredArray[1];

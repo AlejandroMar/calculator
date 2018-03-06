@@ -1,4 +1,4 @@
-let testArr = ["7", "8", "-", "1"];
+let testArr = ["7", "8";];
 let number = [];
 let testArrLength = testArr.length
 for(let i=testArrLength - 1; i>=0; i--){
