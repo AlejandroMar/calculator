@@ -123,7 +123,6 @@ class Controler {
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
             modelInstance.cleanFilteredArray();
-            //modelInstance.resultIntoFilteredArray();
             }else{
                 viewInstance.alertInvalidOperation()
                 console.log('Invalid operation')
