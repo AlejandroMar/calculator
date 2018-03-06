@@ -42,7 +42,7 @@ class Model {
     cleanResul(){
         this.result = '';
     }
-
+    
     resultIntoFilteredArray(){
         debugger;
         this.filteredArray.push(this.result);
@@ -87,6 +87,7 @@ class Controler {
         //listen for number Events
         this.numbersArray.forEach((number)=> {
             number.addEventListener('click', (e) =>{
+                //check if matDone to if tru strart again
                 if(modelInstance.mathDone){
                     modelInstance.cleanFilteredArray();
                     modelInstance.mathDone = false;
@@ -99,6 +100,7 @@ class Controler {
 
         //listen for operator events
         this.operatorsArray.forEach((operator)=> {
+            //check if  mathDone if true continue
             operator.addEventListener('click', (e)=>{
                 if(modelInstance.mathDone){
                     modelInstance.resultIntoFilteredArray();   
