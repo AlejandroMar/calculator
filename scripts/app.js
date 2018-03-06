@@ -38,6 +38,10 @@ class Model {
         this.result = '';
     }
 
+    resultIntoFilteredArray(){
+        this.filteredArray.push(this.result);
+    }
+
     // function in charge of resolving the equation
     doMath(arr){
         //debugger;    
@@ -95,6 +99,7 @@ class Controler {
             modelInstance.doMath(modelInstance.filteredArray);
             viewInstance.showResult(modelInstance.result);
             modelInstance.cleanFilteredArray();
+            modelInstance.resultIntoFilteredArray();
             }else{
                 viewInstance.alertInvalidOperation()
                 console.log('Invalid operation')
