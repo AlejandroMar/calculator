@@ -9,21 +9,24 @@ class Model {
     //funtion to configurate the percentage in the filtered array
      setPercentInFilteredArr(){
          debugger
-        let tempArr = this.filteredArray.map(element => element);
-        let setPercentOperation = String (Number(String(parseInt(tempArr.reverse().join('')))
-                    .split('')
-                    .reverse().join('')) /100);
-                       
-        this.filteredArray.pop();
-        this.filteredArray.push(setPercentOperation);
-
-        console.log('original', this.filteredArray);
-        console.log('percent', setPercentOperation);
-        console.log('mapped', tempArr);
-        
-        
-        
-        
+         //still don't know if I should reference the array I like it it's more clear
+        let tempArr = this.filteredArray;
+        let numberForPercent = [];
+        let tempArrLength = tempArr.length;
+        //loop backwards to get only the number to divide by 100
+        for(let i=tempArrLength -1; i>=0; i--){
+            if(this.operators.includes(tempArr[i])){
+                break;
+            }
+            numberForPercent.unshift(tempArr.pop());
+            console.log('test percent', tempArr);
+            
+        }
+        //divide the number by 100
+        numberForPercent.push('/', '100');
+        numberForPercent = numberForPercent.join('');
+        let numberInpercent = String(eval(numberForPercent));
+        tempArr.push(numberInpercent);    
      }
 
     //function for cleaning the array
