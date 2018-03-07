@@ -73,7 +73,6 @@ class Controler {
         this.numbersArray.forEach((number)=> {
             number.addEventListener('click', (e) =>{
                 //check if matDone to if tru strart again
-                
                 let clickedNumber = e.target.dataset.number;
                 this.checkForNumber(clickedNumber);
                 viewInstance.displayInput(modelInstance.filteredArray);
@@ -131,7 +130,10 @@ class Controler {
         })
 
         this.percentBtn.addEventListener('click', () =>{ 
-            modelInstance.resultIntoFilteredArray();
+            if(modelInstance.mathDone){
+                modelInstance.resultIntoFilteredArray();
+            }
+            
             let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
             
             if(modelInstance.filteredArray.length === 0){
