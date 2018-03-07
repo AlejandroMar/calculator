@@ -147,7 +147,7 @@ class Controler {
             modelInstance.mathDone = false;
         }
         if(lastItem === '/100'){
-            modelInstance.filteredArray.push('*', data);
+            modelInstance.filteredArray.push('*');
         }
         
         modelInstance.filteredArray.push(data);
