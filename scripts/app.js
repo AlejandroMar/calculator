@@ -6,18 +6,11 @@ class Model {
         this.cleanFilteredArray;
         this.mathDone = false;  
     }
-
-   
-
     //funtion to configurate the percentage in the filtered array
-     setPercentInFilteredArr(){
-        
+     setPercentInFilteredArr(){ 
          //still don't know if I should reference the array I like it it's more clear
         let tempArr = this.filteredArray;
-        tempArr.push('/100');
-        console.log(tempArr);
-        console.log(this.filteredArray);
-          
+        tempArr.push('/100');  
      }
 
     //function for cleaning the array
@@ -57,8 +50,7 @@ class Controler {
         this.percentBtn = this.controlBtns.querySelector('[data-percent]');
         this.numbersArray = Array.from(this.controlBtns.querySelectorAll('[data-number]'));
         this.operatorsArray = Array.from(this.controlBtns.querySelectorAll('[data-operator]'));
-        
-        
+           
         //Controler functions initiation
         this.setEventListeners();
         this.checkForNumber;
@@ -162,7 +154,6 @@ class Controler {
     } 
 
     // functions for checking diferent inputs
-   
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
@@ -210,8 +201,7 @@ class Controler {
     }
     
     //This function makes shure the array is ready for the math function
-    prepArrayForMath(){
-        
+    prepArrayForMath(){   
         let lastItemTestPassed = false;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let seconItem = modelInstance.filteredArray[1];
@@ -223,7 +213,7 @@ class Controler {
             lastItemTestPassed = true;
         }
         //check if first item in array is 0
-        if(firstItem === '0' && seconItem !== '.'){
+        if((firstItem === '0' && seconItem !== '.') && !modelInstance.operators.includes(seconItem) && seconItem !== '/100'){
             //for octal literals use the "0o" prefix instead
             modelInstance.filteredArray[0] = '0o';
         }
@@ -257,14 +247,10 @@ class View {
             return elem
         }).join('');
         
-        
-        console.log(stringForDisplay);
-        
         this.displayLayer.innerHTML = `<h3 class="userInput">${stringForDisplay}</h3>`
     }
 
     showResult(str){
-       
         this.displayLayer.innerHTML = `<h3 class="answer">${str}</h3>`
     }
 
@@ -272,7 +258,7 @@ class View {
         let invalidOperationMssg = `<p class="invalid-alert red lighten-1">Invalid operation please press undo</p>` 
         this.displayLayer.insertAdjacentHTML('beforeend', invalidOperationMssg )
     }
-     
+      
 }
 
 const modelInstance = new Model();
