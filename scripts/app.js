@@ -23,13 +23,14 @@ class Model {
             }
             numberForPercent.unshift(tempArr.pop());
             console.log('test percent', tempArr);
-            
         }
         //divide the number by 100
         numberForPercent.push('/', '100');
         numberForPercent = numberForPercent.join('');
-        let numberInpercent = String(eval(numberForPercent));
-        tempArr.push(numberInpercent);    
+        tempArr.push(numberForPercent);  
+        console.log(tempArr);
+        console.log(this.filteredArray);
+          
      }
 
     //function for cleaning the array
@@ -221,7 +222,10 @@ class View {
     displayInput(arr){
         let stringForDisplay = arr.map((elem) => {
             if(elem === '%'){
-                elem = 'rest'
+                elem = 'rest';
+            }
+            if(elem.match(/\d+[/]100/)){
+                elem = elem.substring(0, elem.length - 4) + '%';
             }
             return elem
         }).join('');
