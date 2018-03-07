@@ -98,6 +98,7 @@ class Controler {
         });
         //listen for Equal button and habndle the event
         this.equalBtn.addEventListener('click', (e)=>{
+            debugger
              if(modelInstance.mathDone){
                 modelInstance.resultIntoFilteredArray();
                 //viewInstance.showResult(modelInstance.result);
@@ -110,6 +111,7 @@ class Controler {
                 viewInstance.alertInvalidOperation()
                 console.log('Invalid operation')
             }
+            modelInstance.mathDone = true;
         });
         //Undo btn listener
         this.undoBtn.addEventListener('click', (e) => {
@@ -129,26 +131,27 @@ class Controler {
         })
 
         this.percentBtn.addEventListener('click', () =>{ 
+            modelInstance.resultIntoFilteredArray();
             let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
-            debugger;
+            
             if(modelInstance.filteredArray.length === 0){
                 viewInstance.alertInvalidOperation();     
             }
             if(modelInstance.filteredArray.length !== 0){
                 if(modelInstance.mathDone){
-                    modelInstance.resultIntoFilteredArray();   
-                }
-               
-                if(modelInstance.operators.includes(lastItem)){
-                    modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = '/100';
-                    viewInstance.displayInput(modelInstance.filteredArray);
-                    //viewInstance.alertInvalidOperation();
-                }
-    
-                else{
-                    modelInstance.setPercentInFilteredArr();
-                    viewInstance.displayInput(modelInstance.filteredArray);
-                }
+                modelInstance.resultIntoFilteredArray();   
+            }
+           
+            if(modelInstance.operators.includes(lastItem)){
+                modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = '/100';
+                viewInstance.displayInput(modelInstance.filteredArray);
+                //viewInstance.alertInvalidOperation();
+            }
+
+            else{
+                modelInstance.setPercentInFilteredArr();
+                viewInstance.displayInput(modelInstance.filteredArray);
+            }
             }
             
             
