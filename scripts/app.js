@@ -165,7 +165,7 @@ class Controler {
         // Check if last item is and operator
         if(modelInstance.operators.includes(lastItem)){
             //Check if second last is not an operator
-            if(data.operator === '-' && !modelInstance.operators.includes(secondLast)){
+            if((data.operator === '-' && !modelInstance.operators.includes(secondLast)) && lastItem !== '-'){
                 modelInstance.filteredArray.push(data.operator);
                 console.log(modelInstance.filteredArray);  
             }else{
