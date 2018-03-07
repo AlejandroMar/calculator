@@ -14,20 +14,7 @@ class Model {
         
          //still don't know if I should reference the array I like it it's more clear
         let tempArr = this.filteredArray;
-        let numberForPercent = [];
-        let tempArrLength = tempArr.length;
-        //loop backwards to get only the number to divide by 100
-        for(let i=tempArrLength -1; i>=0; i--){
-            if(this.operators.includes(tempArr[i])){
-                break;
-            }
-            numberForPercent.unshift(tempArr.pop());
-            console.log('test percent', tempArr);
-        }
-        //divide the number by 100
-        numberForPercent.push('/', '100');
-        numberForPercent = numberForPercent.join('');
-        tempArr.push(numberForPercent);  
+        tempArr.push('/100');
         console.log(tempArr);
         console.log(this.filteredArray);
           
@@ -230,8 +217,8 @@ class View {
             if(elem === '%'){
                 elem = 'rest';
             }
-            if(elem.match(/\d+[/]100/)){
-                elem = elem.substring(0, elem.length - 4) + '%';
+            if(elem === '/100'){
+                elem =  '%';
             }
             return elem
         }).join('');
