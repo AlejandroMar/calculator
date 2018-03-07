@@ -113,6 +113,8 @@ class Controler {
         });
         //Undo btn listener
         this.undoBtn.addEventListener('click', (e) => {
+            modelInstance.mathDone = false;
+            debugger;   
             this.undo();
             viewInstance.displayInput(modelInstance.filteredArray);
         })
@@ -136,15 +138,18 @@ class Controler {
                 viewInstance.alertInvalidOperation();
                 
             }
+          
             if(modelInstance.operators.includes(lastItem)){
                 modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = '/100';
                 viewInstance.displayInput(modelInstance.filteredArray);
                 //viewInstance.alertInvalidOperation();
             }
+
             else{
                 modelInstance.setPercentInFilteredArr();
                 viewInstance.displayInput(modelInstance.filteredArray);
             }
+            
         })
 
     } 
@@ -189,11 +194,11 @@ class Controler {
             }
             else{
                 modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = data.operator;
-                console.log('Invalid input');  
+                
             }        
         }else{
             modelInstance.filteredArray.push(data.operator);
-                console.log(modelInstance.filteredArray); 
+                console.log(modelInstance.filteredArray);   
             }
     }
     
