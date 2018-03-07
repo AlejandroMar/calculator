@@ -127,6 +127,7 @@ class Controler {
         })
 
         this.percentBtn.addEventListener('click', () =>{ 
+            let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
             debugger;
             if(modelInstance.mathDone){
                 modelInstance.resultIntoFilteredArray();   
@@ -134,7 +135,13 @@ class Controler {
             if(modelInstance.filteredArray.length === 0){
                 viewInstance.alertInvalidOperation();
                 
-            }else{
+            }
+            if(modelInstance.operators.includes(lastItem)){
+                modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = '/100';
+                viewInstance.displayInput(modelInstance.filteredArray);
+                //viewInstance.alertInvalidOperation();
+            }
+            else{
                 modelInstance.setPercentInFilteredArr();
                 viewInstance.displayInput(modelInstance.filteredArray);
             }
