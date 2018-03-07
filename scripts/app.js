@@ -11,7 +11,7 @@ class Model {
 
     //funtion to configurate the percentage in the filtered array
      setPercentInFilteredArr(){
-         debugger
+        
          //still don't know if I should reference the array I like it it's more clear
         let tempArr = this.filteredArray;
         let numberForPercent = [];
@@ -35,7 +35,7 @@ class Model {
 
     //function for cleaning the array
     cleanFilteredArray(){
-        debugger;
+        
         this.filteredArray = [];
     }
 
@@ -44,14 +44,14 @@ class Model {
     }
     
     resultIntoFilteredArray(){
-        debugger;
+       
         this.filteredArray.push(this.result);
         this.mathDone = false;
     }
 
     // function in charge of resolving the equation
     doMath(arr){
-        debugger;   
+        
         let arrayToString = arr.join('');
         console.log(arrayToString);
         this.result = eval(arrayToString);
@@ -88,10 +88,7 @@ class Controler {
         this.numbersArray.forEach((number)=> {
             number.addEventListener('click', (e) =>{
                 //check if matDone to if tru strart again
-                if(modelInstance.mathDone){
-                    modelInstance.cleanFilteredArray();
-                    modelInstance.mathDone = false;
-                }
+                
                 let clickedNumber = e.target.dataset.number;
                 this.checkForNumber(clickedNumber);
                 viewInstance.displayInput(modelInstance.filteredArray);
@@ -145,6 +142,9 @@ class Controler {
         })
 
         this.percentBtn.addEventListener('click', () =>{ 
+            if(modelInstance.mathDone){
+                modelInstance.resultIntoFilteredArray();   
+            }
             modelInstance.setPercentInFilteredArr();
             viewInstance.displayInput(modelInstance.filteredArray);
         })
@@ -156,13 +156,19 @@ class Controler {
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
+        if(modelInstance.mathDone){
+            modelInstance.cleanFilteredArray();
+            modelInstance.mathDone = false;
+        }
+        
         modelInstance.filteredArray.push(data);
         console.log(modelInstance.filteredArray);
+        
     }
    
     //Checks for valid operations
     checkOperators(data){
-        //debugger;
+        
         //define last and second las item in array
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let secondLast = modelInstance.filteredArray[modelInstance.filteredArray.length - 2];
@@ -237,7 +243,7 @@ class View {
     }
 
     showResult(str){
-        debugger;   
+       
         this.displayLayer.innerHTML = `<h3 class="answer">${str}</h3>`
     }
 
