@@ -177,11 +177,18 @@ class Controler {
         console.log(lastItem);
         // Check if last item is and operator
         if(modelInstance.operators.includes(lastItem)){
+            
             //Check if second last is not an operator
             if((data.operator === '-' && !modelInstance.operators.includes(secondLast)) && lastItem !== '-'){
                 modelInstance.filteredArray.push(data.operator);
                 console.log(modelInstance.filteredArray);  
-            }else{
+            }
+            if(modelInstance.operators.includes(lastItem) && modelInstance.operators.includes(secondLast)){
+                modelInstance.filteredArray.pop();
+                modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = data.operator;
+            }
+            else{
+                modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = data.operator;
                 console.log('Invalid input');  
             }        
         }else{
