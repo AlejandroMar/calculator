@@ -39,7 +39,7 @@ class Model {
         
         let arrayToString = arr.join('');
         console.log(arrayToString);
-        this.result = eval(arrayToString);
+        this.result = String(eval(arrayToString));
         console.log(this.result);
         this.mathDone = true;
     } 
@@ -127,11 +127,17 @@ class Controler {
         })
 
         this.percentBtn.addEventListener('click', () =>{ 
+            debugger;
             if(modelInstance.mathDone){
                 modelInstance.resultIntoFilteredArray();   
             }
-            modelInstance.setPercentInFilteredArr();
-            viewInstance.displayInput(modelInstance.filteredArray);
+            if(modelInstance.filteredArray.length === 0){
+                viewInstance.alertInvalidOperation();
+                
+            }else{
+                modelInstance.setPercentInFilteredArr();
+                viewInstance.displayInput(modelInstance.filteredArray);
+            }
         })
 
     } 
