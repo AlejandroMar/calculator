@@ -22,7 +22,6 @@ class Model {
 
     //function for cleaning the array
     cleanFilteredArray(){
-        
         this.filteredArray = [];
     }
 
@@ -31,7 +30,6 @@ class Model {
     }
     
     resultIntoFilteredArray(){
-       
         this.filteredArray.push(this.result);
         this.mathDone = false;
     }
@@ -143,9 +141,13 @@ class Controler {
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
+        let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         if(modelInstance.mathDone){
             modelInstance.cleanFilteredArray();
             modelInstance.mathDone = false;
+        }
+        if(lastItem === '/100'){
+            modelInstance.filteredArray.push('*', data);
         }
         
         modelInstance.filteredArray.push(data);
