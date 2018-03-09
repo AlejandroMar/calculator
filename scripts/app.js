@@ -177,9 +177,12 @@ class Controler {
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let secondLast = modelInstance.filteredArray[modelInstance.filteredArray.length - 2];
         console.log(lastItem);
-        if(modelInstance.filteredArray.length === 0){
+        if(modelInstance.filteredArray.length === 0 && data.operator !== '-'){
             // viewInstance.alertInvalidOperation();    
             console.log('invalid operation');
+             
+         }else if(modelInstance.filteredArray.length === 1 && modelInstance.operators.includes(lastItem)){
+             console.log('invalid');
              
          }
         // Check if last item is and operator
@@ -190,7 +193,7 @@ class Controler {
                 modelInstance.filteredArray.push(data.operator);
                 console.log(modelInstance.filteredArray);  
             }
-            if(modelInstance.operators.includes(lastItem) && modelInstance.operators.includes(secondLast)){
+            else if(modelInstance.operators.includes(lastItem) && modelInstance.operators.includes(secondLast)){
                 modelInstance.filteredArray.pop();
                 modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = data.operator;
             }
