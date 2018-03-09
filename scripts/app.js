@@ -155,17 +155,27 @@ class Controler {
 
     //checks if input is a number and if true push to array
     checkForNumber(data){
+        debugger;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
-        if(modelInstance.mathDone){
+        if(lastItem === '.'){
+            console.log('invalid');
+            
+        }
+        else if(modelInstance.mathDone){
             modelInstance.cleanFilteredArray();
             modelInstance.mathDone = false;
+            modelInstance.filteredArray.push(data);
+            
         }
-        if(lastItem === '/100'){
+        else if(lastItem === '/100'){
             modelInstance.filteredArray.push('*');
+            modelInstance.filteredArray.push(data);
+            console.log(modelInstance.filteredArray);
+        }else{
+            modelInstance.filteredArray.push(data);
+            console.log(modelInstance.filteredArray);
+
         }
-        
-        modelInstance.filteredArray.push(data);
-        console.log(modelInstance.filteredArray);
         
     }
    
