@@ -109,6 +109,7 @@ class Controler {
         })
         //reset button listener
         this.resetBtn.addEventListener('click', (e) =>{
+            modelInstance.mathDone = false;
             //clean array
             modelInstance.cleanFilteredArray();
             //clean result
@@ -118,6 +119,7 @@ class Controler {
         })
 
         this.percentBtn.addEventListener('click', () =>{ 
+            debugger;
             if(modelInstance.mathDone){
                 modelInstance.resultIntoFilteredArray();
             }
@@ -128,23 +130,25 @@ class Controler {
                // viewInstance.alertInvalidOperation();    
                console.log('invalid operation');
                 
+            }else if(modelInstance.filteredArray.length === 1 && modelInstance.operators.includes(lastItem)){
+                console.log('invalid');
+                
             }
-            if(modelInstance.filteredArray.length !== 0){
+            else if(modelInstance.filteredArray.length !== 0){
                 if(modelInstance.mathDone){
                 modelInstance.resultIntoFilteredArray();   
-            }
-           
-            if(modelInstance.operators.includes(lastItem)){
+               }else if(modelInstance.operators.includes(lastItem)){
                 modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = '/100';
                 viewInstance.displayInput(modelInstance.filteredArray);
                 //viewInstance.alertInvalidOperation();
-            }
-
-            else{
+            }   else{
                 modelInstance.setPercentInFilteredArr();
                 viewInstance.displayInput(modelInstance.filteredArray);
+             }
             }
-            }
+            
+            
+            
             
             
         })
