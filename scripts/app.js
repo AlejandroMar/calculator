@@ -161,7 +161,8 @@ class Controler {
     checkForNumber(data){
         debugger;
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
-        if(lastItem === '.'){
+        //Don't allow two  consecutive decimal point 
+        if(lastItem === '.' && data === '.'){
             console.log('invalid');
             
         }
