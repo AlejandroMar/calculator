@@ -40,6 +40,9 @@ class Model {
 
 //Controler Class
 class Controler {
+    /* 
+    At this point I think I'm done I'm beginning to think it could be better with regular expressions
+    so no va mas! */
     constructor(){
         //get the  buttons container
         this.controlBtns = document.getElementById('controlBtns');
