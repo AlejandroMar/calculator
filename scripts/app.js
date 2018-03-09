@@ -53,10 +53,6 @@ class Controler {
            
         //Controler functions initiation
         this.setEventListeners();
-        this.checkForNumber;
-        this.checkOperators;
-        this.prepArrayForMath;
-        this.undo;
     }
 
     //listen for events
@@ -129,7 +125,9 @@ class Controler {
             let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
             
             if(modelInstance.filteredArray.length === 0){
-                viewInstance.alertInvalidOperation();     
+               // viewInstance.alertInvalidOperation();    
+               console.log('invalid operation');
+                
             }
             if(modelInstance.filteredArray.length !== 0){
                 if(modelInstance.mathDone){
@@ -173,13 +171,19 @@ class Controler {
    
     //Checks for valid operations
     checkOperators(data){
+        debugger;   
         
         //define last and second las item in array
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let secondLast = modelInstance.filteredArray[modelInstance.filteredArray.length - 2];
         console.log(lastItem);
+        if(modelInstance.filteredArray.length === 0){
+            // viewInstance.alertInvalidOperation();    
+            console.log('invalid operation');
+             
+         }
         // Check if last item is and operator
-        if(modelInstance.operators.includes(lastItem)){
+        else if(modelInstance.operators.includes(lastItem)){
             
             //Check if second last is not an operator
             if((data.operator === '-' && !modelInstance.operators.includes(secondLast)) && lastItem !== '-'){
