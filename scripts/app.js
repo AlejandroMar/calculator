@@ -177,10 +177,11 @@ class Controler {
         let lastItem = modelInstance.filteredArray[modelInstance.filteredArray.length - 1];
         let secondLast = modelInstance.filteredArray[modelInstance.filteredArray.length - 2];
         console.log(lastItem);
+        //If empty array only allow minus as first item not other operatos
         if(modelInstance.filteredArray.length === 0 && data.operator !== '-'){
             // viewInstance.alertInvalidOperation();    
             console.log('invalid operation');
-             
+             //if minus is allready the firs operator don't allow other operators
          }else if(modelInstance.filteredArray.length === 1 && modelInstance.operators.includes(lastItem)){
              console.log('invalid');
              
@@ -193,6 +194,7 @@ class Controler {
                 modelInstance.filteredArray.push(data.operator);
                 console.log(modelInstance.filteredArray);  
             }
+            //change operators to help the user
             else if(modelInstance.operators.includes(lastItem) && modelInstance.operators.includes(secondLast)){
                 modelInstance.filteredArray.pop();
                 modelInstance.filteredArray[modelInstance.filteredArray.length - 1] = data.operator;
